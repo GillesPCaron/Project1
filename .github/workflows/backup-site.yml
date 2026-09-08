@@ -35,9 +35,12 @@ jobs:
             --no-host-directories \
             --wait=1 \
             --random-wait \
+            --tries=2 \
+            --timeout=30 \
             --user-agent="Mozilla/5.0 (compatible; SiteBackupBot/1.0)" \
             -P site \
-            https://www.associatedartcollectors.com/fr
+            https://www.associatedartcollectors.com/fr \
+          || echo "wget a signalé des erreurs mineures (liens morts, ressources manquantes, etc.) - la sauvegarde se poursuit quand même."
           # Note : --mirror active automatiquement le "timestamping" (-N) : seuls les
           # fichiers modifiés depuis la dernière exécution sont retéléchargés, car le
           # dossier "site/" est conservé d'une exécution à l'autre (contrairement à un

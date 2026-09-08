@@ -2,13 +2,19 @@ name: Sauvegarde bi-mensuelle du site
 
 on:
   schedule:
-    # Se déclenche le 1er et le 15 de chaque mois à 3h du matin (UTC)
-    - cron: '0 3 1,15 * *'
+    # Se déclenche le 1er et le 15 de chaque mois à 05:00 UTC
+    # = minuit heure de l'Est (hiver) / 1h du matin (été, à cause du changement d'heure)
+    - cron: '0 5 1,15 * *'
   workflow_dispatch: # permet aussi de lancer la sauvegarde manuellement depuis l'onglet "Actions"
+
+concurrency:
+  group: sauvegarde-site
+  cancel-in-progress: true # si une nouvelle exécution démarre, l'ancienne (encore en cours) est annulée automatiquement
 
 jobs:
   backup:
     runs-on: ubuntu-latest
+    timeout-minutes: 90 # sécurité : annule le job s'il dépasse 1h30 (évite un blocage indéfini)
     steps:
       - name: Récupérer le dépôt
         uses: actions/checkout@v4
@@ -17,33 +23,54 @@ jobs:
         id: date
         run: echo "today=$(date +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
 
-      - name: Aspirer une copie statique du site
+      - name: Mettre à jour la copie statique du site (téléchargement incrémental)
         run: |
-          mkdir -p "backups/${{ steps.date.outputs.today }}"
+          mkdir -p site
           wget \
             --mirror \
             --page-requisites \
             --convert-links \
             --adjust-extension \
             --no-parent \
+            --no-host-directories \
             --wait=1 \
             --random-wait \
             --user-agent="Mozilla/5.0 (compatible; SiteBackupBot/1.0)" \
-            -P "backups/${{ steps.date.outputs.today }}" \
+            -P site \
             https://www.associatedartcollectors.com/fr
+          # Note : --mirror active automatiquement le "timestamping" (-N) : seuls les
+          # fichiers modifiés depuis la dernière exécution sont retéléchargés, car le
+          # dossier "site/" est conservé d'une exécution à l'autre (contrairement à un
+          # dossier daté qui repartirait de zéro à chaque fois).
 
-      - name: Ne garder que les 2 dernières sauvegardes
-        run: |
-          cd backups
-          # Liste les dossiers de sauvegarde du plus ancien au plus récent,
-          # puis supprime tous ceux qui dépassent les 2 derniers.
-          ls -1d */ | sort | head -n -2 | xargs -r rm -rf --
-          cd ..
-
-      - name: Committer et pousser la sauvegarde
+      - name: Committer, taguer et pousser la sauvegarde
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add backups/
-          git commit -m "Sauvegarde automatique du ${{ steps.date.outputs.today }}" || echo "Aucun changement à committer"
-          git push
+          git add site/
+          if git diff --cached --quiet; then
+            echo "Aucun changement détecté depuis la dernière sauvegarde."
+          else
+            git commit -m "Sauvegarde automatique du ${{ steps.date.outputs.today }}"
+            git tag "sauvegarde-${{ steps.date.outputs.today }}"
+            git push
+            git push origin "sauvegarde-${{ steps.date.outputs.today }}"
+          fi
+
+      - name: Envoyer un courriel de confirmation
+        if: always() # envoie le courriel même si une étape précédente a échoué, pour être informé dans tous les cas
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.MAIL_SERVER }}
+          server_port: ${{ secrets.MAIL_PORT }}
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "Sauvegarde du site - ${{ steps.date.outputs.today }} - ${{ job.status }}"
+          to: info@associatedartcollectors.com
+          from: "Sauvegarde automatique <${{ secrets.MAIL_USERNAME }}>"
+          body: |
+            La sauvegarde bi-mensuelle du site a été exécutée le ${{ steps.date.outputs.today }}.
+            Statut : ${{ job.status }}
+
+            Détails complets disponibles ici :
+            ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}

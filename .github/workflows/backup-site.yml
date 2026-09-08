@@ -1,0 +1,49 @@
+name: Sauvegarde bi-mensuelle du site
+
+on:
+  schedule:
+    # Se déclenche le 1er et le 15 de chaque mois à 3h du matin (UTC)
+    - cron: '0 3 1,15 * *'
+  workflow_dispatch: # permet aussi de lancer la sauvegarde manuellement depuis l'onglet "Actions"
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+
+      - name: Définir la date du jour
+        id: date
+        run: echo "today=$(date +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+
+      - name: Aspirer une copie statique du site
+        run: |
+          mkdir -p "backups/${{ steps.date.outputs.today }}"
+          wget \
+            --mirror \
+            --page-requisites \
+            --convert-links \
+            --adjust-extension \
+            --no-parent \
+            --wait=1 \
+            --random-wait \
+            --user-agent="Mozilla/5.0 (compatible; SiteBackupBot/1.0)" \
+            -P "backups/${{ steps.date.outputs.today }}" \
+            https://www.associatedartcollectors.com/fr
+
+      - name: Ne garder que les 2 dernières sauvegardes
+        run: |
+          cd backups
+          # Liste les dossiers de sauvegarde du plus ancien au plus récent,
+          # puis supprime tous ceux qui dépassent les 2 derniers.
+          ls -1d */ | sort | head -n -2 | xargs -r rm -rf --
+          cd ..
+
+      - name: Committer et pousser la sauvegarde
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add backups/
+          git commit -m "Sauvegarde automatique du ${{ steps.date.outputs.today }}" || echo "Aucun changement à committer"
+          git push

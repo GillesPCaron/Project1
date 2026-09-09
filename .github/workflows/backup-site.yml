@@ -38,6 +38,8 @@ jobs:
             --tries=2 \
             --timeout=30 \
             --user-agent="Mozilla/5.0 (compatible; SiteBackupBot/1.0)" \
+            --include-directories=/fr \
+            --reject-regex="(\?|&)(sort|order|tri|page|per_page|dir)=" \
             -P site \
             https://www.associatedartcollectors.com/fr \
           || echo "wget a signalé des erreurs mineures (liens morts, ressources manquantes, etc.) - la sauvegarde se poursuit quand même."
@@ -45,6 +47,9 @@ jobs:
           # fichiers modifiés depuis la dernière exécution sont retéléchargés, car le
           # dossier "site/" est conservé d'une exécution à l'autre (contrairement à un
           # dossier daté qui repartirait de zéro à chaque fois).
+          # --include-directories=/fr : reste dans la section française, ne suit pas les liens vers /en/.
+          # --reject-regex : ignore les URLs de tri/pagination (ex. ?sort=titre, ?page=2), qui
+          # dupliquent inutilement le même contenu sous des dizaines/centaines de variantes d'URL.
 
       - name: Committer, taguer et pousser la sauvegarde
         run: |

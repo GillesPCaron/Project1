@@ -14,7 +14,7 @@ concurrency:
 jobs:
   backup:
     runs-on: ubuntu-latest
-    timeout-minutes: 90 # sécurité : annule le job s'il dépasse 1h30 (évite un blocage indéfini)
+    timeout-minutes: 330 # sécurité : la 1ère sauvegarde complète peut prendre 4-4h30, marge portée à 5h30 (max technique GitHub = 6h)
     steps:
       - name: Récupérer le dépôt
         uses: actions/checkout@v4

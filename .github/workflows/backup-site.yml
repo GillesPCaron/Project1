@@ -11,6 +11,9 @@ concurrency:
   group: sauvegarde-site
   cancel-in-progress: true # si une nouvelle exécution démarre, l'ancienne (encore en cours) est annulée automatiquement
 
+permissions:
+  contents: write # nécessaire pour que le job puisse committer et pousser dans le dépôt
+
 jobs:
   backup:
     runs-on: ubuntu-latest

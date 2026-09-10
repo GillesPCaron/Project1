@@ -67,21 +67,3 @@ jobs:
             git push
             git push origin "sauvegarde-${{ steps.date.outputs.today }}"
           fi
-
-      - name: Envoyer un courriel de confirmation
-        if: always() # envoie le courriel même si une étape précédente a échoué, pour être informé dans tous les cas
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: ${{ secrets.MAIL_SERVER }}
-          server_port: ${{ secrets.MAIL_PORT }}
-          username: ${{ secrets.MAIL_USERNAME }}
-          password: ${{ secrets.MAIL_PASSWORD }}
-          subject: "Sauvegarde du site - ${{ steps.date.outputs.today }} - ${{ job.status }}"
-          to: info@associatedartcollectors.com
-          from: "Sauvegarde automatique <${{ secrets.MAIL_USERNAME }}>"
-          body: |
-            La sauvegarde bi-mensuelle du site a été exécutée le ${{ steps.date.outputs.today }}.
-            Statut : ${{ job.status }}
-
-            Détails complets disponibles ici :
-            ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}

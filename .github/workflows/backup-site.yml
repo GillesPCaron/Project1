@@ -63,7 +63,7 @@ jobs:
             echo "Aucun changement détecté depuis la dernière sauvegarde."
           else
             git commit -m "Sauvegarde automatique du ${{ steps.date.outputs.today }}"
-            git tag "sauvegarde-${{ steps.date.outputs.today }}"
             git push
-            git push origin "sauvegarde-${{ steps.date.outputs.today }}"
+            git tag "sauvegarde-${{ steps.date.outputs.today }}" || echo "Étiquette déjà existante pour aujourd'hui (probablement un second lancement le même jour) - ignoré."
+            git push origin "sauvegarde-${{ steps.date.outputs.today }}" || echo "Push de l'étiquette ignoré (déjà présente sur le dépôt distant)."
           fi

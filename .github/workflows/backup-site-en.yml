@@ -53,6 +53,13 @@ jobs:
           # --reject-regex : ignore les URLs de tri/pagination (ex. ?sort=title, ?page=2), qui
           # dupliquent inutilement le même contenu sous des dizaines/centaines de variantes d'URL.
 
+      - name: Corriger le lien vers la version française
+        run: |
+          find site-en -type f -name "*.html" -exec sed -i \
+            's#href="https://www.associatedartcollectors.com/fr"#href="https://gillespcaron.github.io/Project1/site/fr"#g' \
+            {} +
+          echo "Lien 'Français' repointé vers la sauvegarde GitHub du site français."
+
       - name: Committer, taguer et pousser la sauvegarde
         run: |
           git config user.name "github-actions[bot]"

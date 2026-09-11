@@ -1,1 +1,68 @@
+name: Sauvegarde bi-mensuelle du site (EN)
 
+on:
+  schedule:
+    # Se déclenche le 1er et le 15 de chaque mois à 05:15 UTC (décalé de 15 min par
+    # rapport à la version FR pour éviter que les deux tournent exactement en même temps)
+    - cron: '15 5 1,15 * *'
+  workflow_dispatch: # permet aussi de lancer la sauvegarde manuellement depuis l'onglet "Actions"
+
+concurrency:
+  group: sauvegarde-site-en
+  cancel-in-progress: true # si une nouvelle exécution démarre, l'ancienne (encore en cours) est annulée automatiquement
+
+permissions:
+  contents: write # nécessaire pour que le job puisse committer et pousser dans le dépôt
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330 # sécurité : la 1ère sauvegarde complète peut prendre plusieurs heures, marge portée à 5h30 (max technique GitHub = 6h)
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+
+      - name: Définir la date du jour
+        id: date
+        run: echo "today=$(date +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+
+      - name: Mettre à jour la copie statique du site (téléchargement incrémental)
+        run: |
+          mkdir -p site-en
+          wget \
+            --mirror \
+            --page-requisites \
+            --convert-links \
+            --adjust-extension \
+            --no-parent \
+            --no-host-directories \
+            --wait=1 \
+            --random-wait \
+            --tries=2 \
+            --timeout=30 \
+            --user-agent="Mozilla/5.0 (compatible; SiteBackupBot/1.0)" \
+            --include-directories=/en \
+            --reject-regex="(\?|&)(sort|order|tri|page|per_page|dir)=" \
+            -P site-en \
+            https://www.associatedartcollectors.com/en \
+          || echo "wget a signalé des erreurs mineures (liens morts, ressources manquantes, etc.) - la sauvegarde se poursuit quand même."
+          # Note : --mirror active automatiquement le "timestamping" (-N) : seuls les
+          # fichiers modifiés depuis la dernière exécution sont retéléchargés, car le
+          # dossier "site-en/" est conservé d'une exécution à l'autre.
+          # --include-directories=/en : reste dans la section anglaise, ne suit pas les liens vers /fr/.
+          # --reject-regex : ignore les URLs de tri/pagination (ex. ?sort=title, ?page=2), qui
+          # dupliquent inutilement le même contenu sous des dizaines/centaines de variantes d'URL.
+
+      - name: Committer, taguer et pousser la sauvegarde
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add site-en/
+          if git diff --cached --quiet; then
+            echo "Aucun changement détecté depuis la dernière sauvegarde."
+          else
+            git commit -m "Sauvegarde automatique (EN) du ${{ steps.date.outputs.today }}"
+            git push
+            git tag "sauvegarde-en-${{ steps.date.outputs.today }}" || echo "Étiquette déjà existante pour aujourd'hui (probablement un second lancement le même jour) - ignoré."
+            git push origin "sauvegarde-en-${{ steps.date.outputs.today }}" || echo "Push de l'étiquette ignoré (déjà présente sur le dépôt distant)."
+          fi

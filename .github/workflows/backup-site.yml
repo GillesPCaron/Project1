@@ -61,6 +61,37 @@ jobs:
             {} +
           echo "Lien 'English' repointé vers la sauvegarde GitHub du site anglais."
 
+      - name: Ajouter une balise canonique vers le site officiel (SEO)
+        run: |
+          find site -type f -name "*.html" | while read -r f; do
+            rel="${f#site/}"
+            case "$rel" in
+              */index.html) livepath="${rel%index.html}" ;;
+              *) livepath="${rel%.html}" ;;
+            esac
+            canonical="https://www.associatedartcollectors.com/${livepath}"
+            if ! grep -qi '<link rel="canonical"' "$f"; then
+              sed -i "0,/<head>/s#<head>#<head>\n  <link rel=\"canonical\" href=\"${canonical}\" />#I" "$f"
+            fi
+          done
+          echo "Balises canoniques ajoutées (pointant vers le site officiel tant qu'il est en ligne)."
+          # Ces balises indiquent à Google que la version officielle du site fait autorité.
+          # Si cette page officielle disparaît un jour, Google finit par indexer directement
+          # cette copie GitHub à sa place - aucune action future requise de votre part.
+
+      - name: Générer un plan du site (sitemap.xml) pour Google Search Console
+        run: |
+          {
+            echo '<?xml version="1.0" encoding="UTF-8"?>'
+            echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+            find site -name "*.html" | while read -r f; do
+              rel="${f#site/}"
+              echo "  <url><loc>https://gillespcaron.github.io/Project1/site/${rel}</loc></url>"
+            done
+            echo '</urlset>'
+          } > site/sitemap.xml
+          echo "sitemap.xml généré avec $(grep -c '<url>' site/sitemap.xml) pages."
+
       - name: Committer, taguer et pousser la sauvegarde
         run: |
           git config user.name "github-actions[bot]"

@@ -28,9 +28,10 @@ jobs:
 
       - name: Nettoyer les fichiers de notification déjà téléchargés par le passé
         run: |
-          count=$(find site -iname "*notification*" | wc -l)
+          count=$(find site -iname "*notification*" -o -path "*provider_registrations*" | wc -l)
           find site -iname "*notification*" -delete
-          echo "$count ancien(s) fichier(s) de notification supprimé(s)."
+          find site -path "*provider_registrations*" -delete
+          echo "$count ancien(s) fichier(s) indésirable(s) supprimé(s)."
 
       - name: Mettre à jour la copie statique du site (téléchargement incrémental)
         run: |
@@ -48,7 +49,7 @@ jobs:
             --timeout=30 \
             --user-agent="Mozilla/5.0 (compatible; SiteBackupBot/1.0)" \
             --include-directories=/fr \
-            --reject-regex="(\?|&)(sort|order|tri|page|per_page|dir|notification|letter)" \
+            --reject-regex="(\?|&)(sort|order|tri|page|per_page|dir|notification|letter)|provider_registrations/new" \
             -P site \
             https://www.associatedartcollectors.com/fr \
           || echo "wget a signalé des erreurs mineures (liens morts, ressources manquantes, etc.) - la sauvegarde se poursuit quand même."

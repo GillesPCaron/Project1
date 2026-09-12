@@ -26,6 +26,12 @@ jobs:
         id: date
         run: echo "today=$(date +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
 
+      - name: Nettoyer les fichiers de notification déjà téléchargés par le passé
+        run: |
+          count=$(find site -iname "*notification*" | wc -l)
+          find site -iname "*notification*" -delete
+          echo "$count ancien(s) fichier(s) de notification supprimé(s)."
+
       - name: Mettre à jour la copie statique du site (téléchargement incrémental)
         run: |
           mkdir -p site
@@ -42,7 +48,7 @@ jobs:
             --timeout=30 \
             --user-agent="Mozilla/5.0 (compatible; SiteBackupBot/1.0)" \
             --include-directories=/fr \
-            --reject-regex="(\?|&)(sort|order|tri|page|per_page|dir)=" \
+            --reject-regex="(\?|&)(sort|order|tri|page|per_page|dir|notification|letter)" \
             -P site \
             https://www.associatedartcollectors.com/fr \
           || echo "wget a signalé des erreurs mineures (liens morts, ressources manquantes, etc.) - la sauvegarde se poursuit quand même."
@@ -51,8 +57,9 @@ jobs:
           # dossier "site/" est conservé d'une exécution à l'autre (contrairement à un
           # dossier daté qui repartirait de zéro à chaque fois).
           # --include-directories=/fr : reste dans la section française, ne suit pas les liens vers /en/.
-          # --reject-regex : ignore les URLs de tri/pagination (ex. ?sort=titre, ?page=2), qui
-          # dupliquent inutilement le même contenu sous des dizaines/centaines de variantes d'URL.
+          # --reject-regex : ignore les URLs de tri/pagination ET les liens d'action du type
+          # "?notification[artist_id]=XXXX" (abonnement aux notifications par artiste), qui
+          # génèrent à eux seuls des milliers de fausses "pages" sans contenu réel à sauvegarder.
 
       - name: Corriger le lien vers la version anglaise
         run: |

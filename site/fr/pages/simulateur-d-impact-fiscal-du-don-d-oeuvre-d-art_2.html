@@ -1,0 +1,738 @@
+<!DOCTYPE html><html><head>
+  <link rel="canonical" href="https://www.associatedartcollectors.com/fr/pages/simulateur-d-impact-fiscal-du-don-d-oeuvre-d-art_2" /><title>Simulateur d&#x27;impact fiscal du don d&#x27;oeuvre d&#x27;art_2 - Les Collectionneurs Associés</title><link rel='alternate' hreflang='en' href='https://www.associatedartcollectors.com/en/pages/tax-impact-simulator-for-art-donations_2' /><meta content="Simulateur permettant d&#x27;obtenir un aperçu de l&#x27;impact fiscal pour un individu du don d&#x27;une oeuvre d&#x27;art à une institution canadienne en mesure de recevoir de tels dons" name="description" /><meta content="simulateur don oeuvre art fiscalité Québec Canada , art, visuel, collectionneur, achat, vente, acheter, vendre, pair à pair, P2P, arts, information" name="keywords" /><meta content="French" name="language" /><meta content="text/html; charset=utf-8" name="Content-type" /><meta HTTP-EQUIV="Content-Language" content="fr" /><meta content="index, follow" name="robots" /><meta content="3 month" name="revisit-after" /><meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport" /><meta content="authenticity_token" name="csrf-param" />
+<meta content="qKzV78ohSwICkaMd7oECG9WiUc1wTZfcjCCD0XGl51A=" name="csrf-token" /><link href="https://www.associatedartcollectors.com/assets/favicon.ico" rel="icon" /><link href="https://d15f1hlpmi6o0q.cloudfront.net/assets/application-c3b4c5538280a83a6a0350bb938aada4.css" media="all" rel="stylesheet" type="text/css" /><style type="text/css">@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root{
+    --ink:#211d17;
+    --parchment:#ffffff;
+    --parchment-deep:#f7f5f0;
+    --bronze:#9c6b30;
+    --bronze-deep:#7c5322;
+    --verified:#3f5e42;
+    --hairline:#d9cfb6;
+    --muted:#78705f;
+    --white:#fffdf8;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--parchment);
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.5;
+  }
+
+  .afo-wrap{
+    max-width:900px;
+    margin:0 auto;
+    padding:48px 24px 80px;
+  }
+
+  /* ---------- header ---------- */
+  .afo-masthead{
+    border-bottom:2px solid var(--ink);
+    padding-bottom:20px;
+    margin-bottom:36px;
+    position:relative;
+  }
+  .afo-eyebrow{
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--bronze-deep);
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:14px;
+  }
+  h1{
+    font-family:var(--font-display);
+    font-weight:500;
+    font-size:clamp(28px,4vw,40px);
+    margin:0 0 8px;
+    letter-spacing:-.01em;
+  }
+  .afo-sub{
+    color:var(--muted);
+    font-size:15px;
+    max-width:none;
+  }
+
+  /* ---------- notice ---------- */
+  .afo-notice{
+    background:var(--white);
+    border:1px solid var(--hairline);
+    border-left:3px solid var(--bronze);
+    padding:14px 18px;
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:40px;
+    border-radius:2px;
+  }
+  .afo-notice strong{color:var(--ink);}
+
+  /* ---------- form ---------- */
+  .afo-panel{
+    background:var(--white);
+    border:1px solid var(--hairline);
+    border-radius:3px;
+    padding:32px;
+    margin-bottom:40px;
+  }
+  .afo-panel h2{
+    font-family:var(--font-display);
+    font-weight:500;
+    font-size:20px;
+    margin:0 0 22px;
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+  }
+  .afo-panel h2 .afo-num{
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--bronze);
+    border:1px solid var(--bronze);
+    border-radius:50%;
+    width:20px;height:20px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .afo-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px 24px;
+  }
+  @media(max-width:640px){ .afo-grid{grid-template-columns:1fr;} }
+
+  label{
+    display:block;
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--ink);
+    margin-bottom:6px;
+  }
+  .afo-hint{
+    display:block;
+    font-weight:400;
+    font-size:11.5px;
+    color:var(--muted);
+    margin-top:4px;
+  }
+  .afo-input-money{
+    position:relative;
+    display:flex;
+    align-items:center;
+    border:1px solid var(--hairline);
+    border-radius:2px;
+    background:var(--parchment);
+    padding:0 12px;
+  }
+  .afo-input-money:focus-within{
+    outline:2px solid var(--bronze);
+    outline-offset:1px;
+    background:var(--white);
+  }
+  .afo-input-money .afo-dollar{
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    padding:11px 0;
+    color:var(--muted);
+    font-family:var(--font-mono);
+    font-size:15px;
+    line-height:1;
+    padding-right:6px;
+    position:relative;
+    top:-5px;
+  }
+  input[type=number]{
+    flex:1;
+    width:100%;
+    min-width:0;
+    padding:11px 0;
+    border:none;
+    border-radius:0;
+    font-family:var(--font-mono);
+    font-size:15px;
+    line-height:1;
+    background:transparent;
+    color:var(--ink);
+    -moz-appearance:textfield;
+  }
+  input[type=number]:focus{
+    outline:none;
+  }
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button{
+    -webkit-appearance:none; margin:0;
+  }
+
+  .afo-checkrow{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    margin-top:22px;
+    padding-top:20px;
+    border-top:1px dashed var(--hairline);
+  }
+  .afo-checkrow input{margin-top:3px;}
+  .afo-checkrow .afo-ctext{font-size:13px;color:var(--ink);}
+  .afo-checkrow .afo-ctext .afo-hint{margin-top:2px;}
+
+  /* ---------- results ---------- */
+  .afo-results-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:18px;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .afo-results-head h2{
+    font-family:var(--font-display);
+    font-weight:500;
+    font-size:22px;
+    margin:0;
+  }
+  .afo-results-head .afo-stamp-note{
+    font-family:var(--font-mono);
+    font-size:11px;
+    color:var(--muted);
+  }
+
+  .afo-ledger{
+    background:var(--white);
+    border:1px solid var(--hairline);
+    border-radius:3px;
+    overflow:hidden;
+  }
+
+  .afo-program{
+    padding:26px 28px;
+    border-bottom:1px solid var(--hairline);
+    position:relative;
+  }
+  .afo-program:last-child{border-bottom:none;}
+  .afo-program.afo-best{
+    background:linear-gradient(180deg, #faf6ea 0%, var(--white) 60px);
+  }
+  .afo-program-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:16px;
+    margin-bottom:16px;
+  }
+  .afo-program-name{
+    font-family:var(--font-display);
+    font-size:18px;
+    font-weight:500;
+    margin:0 0 4px;
+  }
+  .afo-program-desc{
+    font-size:12.5px;
+    color:var(--muted);
+    max-width:52ch;
+  }
+  .afo-seal{
+    flex-shrink:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    width:64px;height:64px;
+    border-radius:50%;
+    border:1.5px solid var(--verified);
+    color:var(--verified);
+    font-family:var(--font-mono);
+    font-size:9.5px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    text-align:center;
+    line-height:1.2;
+    transform:rotate(-8deg);
+  }
+  .afo-program.afo-best .afo-seal{display:flex;}
+
+  .afo-rows{
+    display:grid;
+    gap:9px;
+    margin-bottom:6px;
+  }
+  .afo-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    font-size:13.5px;
+    gap:12px;
+  }
+  .afo-row .afo-label{
+    color:var(--muted);
+    white-space:nowrap;
+  }
+  .afo-row .afo-leader{
+    flex:1;
+    border-bottom:1px dotted var(--hairline);
+    margin-bottom:4px;
+  }
+  .afo-row .afo-value{
+    font-family:var(--font-mono);
+    font-size:13.5px;
+    white-space:nowrap;
+  }
+  .afo-row.afo-total .afo-label, .afo-row.afo-total .afo-value{
+    color:var(--ink);
+    font-weight:600;
+    font-size:15px;
+  }
+  .afo-row.afo-total .afo-value{color:var(--verified);}
+  .afo-row.afo-subtract .afo-value{color:#8a3b2b;}
+
+  .afo-conditions{
+    margin-top:16px;
+    padding-top:14px;
+    border-top:1px dashed var(--hairline);
+    font-size:12px;
+    color:var(--muted);
+  }
+  .afo-conditions strong{color:var(--ink); font-weight:600;}
+
+  /* ---------- footer ---------- */
+  .afo-footnote{
+    margin-top:32px;
+    font-size:11.5px;
+    color:var(--muted);
+    line-height:1.6;
+  }
+  .afo-footnote ul{margin:8px 0 0; padding-left:18px;}</style><script id="frontend_toolbar" type="text/template"><div id="toolbar"><a class="editing-mode">Mode edition</a><a class="save">Sauvegarder</a><a class="cancel">Annuler</a></div></script></head><body class="alternative_header"><div class="modal modal-gallery hide fade" id="modal-gallery" tabindex="-1"><div class="modal-header"><a class="close" data-dismiss="modal">×</a><h3 class="modal-title"></h3></div><div class="modal-body"><div class="modal-image"></div></div><div class="modal-footer"><a class="btn btn-primary modal-prev">Précédent<i class="icon-arrow-left icon-white"></i></a><a class="btn btn-info modal-prev"><i class="icon-arrow-right icon-white"></i>Suivant</a><a class="btn btn-success modal-play modal-slideshow" data-slideshow="5000"> Diaporama</a></div></div><ul class="visuallyhidden" id="top"><li><a accesskey="n" href="simulateur-d-impact-fiscal-du-don-d-oeuvre-d-art_2.html#nav" title="Skip to navigation">Skip to navigation</a></li><li><a accesskey="c" href="simulateur-d-impact-fiscal-du-don-d-oeuvre-d-art_2.html#page" title="Skip to content">Skip to content</a></li></ul><div id="header"><div class="container"><div class="toplink"><div class="fr"><a href="https://www.associatedartcollectors.com/en/pages/tax-impact-simulator-for-art-donations_2" locale="en">English</a></div></div><div class="logo"><div class="line_1"></div><a href="../../fr.html"><img alt="Logofr" src="https://d15f1hlpmi6o0q.cloudfront.net/assets/logofr-46ed536ec446d5afd161fb81079aeb73.jpg" /></a></div><div class="tagline">Un moyen pratique, simple et convivial pour faciliter l’échange d’informations et d’œuvres d’art entre tous les collectionneurs d&#39;art visuel</div></div></div><div class="navbar" id="nav"><div class="container"><button class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse" type="button"><span class="sr-only"></span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><div class="nav-collapse collapse"><ul class="nav navbar-nav"><li><a href="../../fr.html">Accueil</a></li><li><a href="acheter-vendre.html">Acheter/Vendre</a></li><li><a href="services-aux-collectionneurs.html">Services aux collectionneurs</a></li><li><a href="../messages/new.html">Contact</a></li></ul></div></div></div><div id="content"><div class="container"><div class="modal hide fade" id="modal_message"><div class="modal-header"><button aria-hidden="true" class="close" data-dismiss="modal" type="button"> &times;</button><h3 id="title"></h3></div><div class="modal-body"><div id="message"></div></div></div><div class="justified"><div class="editable-long-text" data-attribute="body" data-id="158" data-object="pages" data-prefix="/fr"><div class="afo-wrap" id="simulateur">
+<div class="afo-masthead">
+<div class="afo-eyebrow"><span>Les Collectionneurs Associ&eacute;s &mdash; Services aux collectionneurs</span> <span>Outil de planification</span></div>
+
+<h1>Simulateur d&#39;impact fiscal &mdash; don d&#39;une &oelig;uvre d&#39;art</h1>
+
+<div class="afo-sub">Estimation comparative de l&#39;avantage fiscal f&eacute;d&eacute;ral et qu&eacute;b&eacute;cois selon trois programmes de don &agrave; un organisme accr&eacute;dit&eacute; au Canada. Pour une description d&eacute;taill&eacute;e de chaque programme, voir notre article <a href="disposer_oeuvre.html#don" style="color:var(--bronze-deep); font-weight:600;">Disposer d&#39;une &oelig;uvre d&#39;art : donner ou vendre?</a></div>
+</div>
+
+<div class="afo-notice"><strong>Estimation &agrave; titre indicatif seulement.</strong> Cet outil applique des param&egrave;tres fiscaux f&eacute;d&eacute;raux et qu&eacute;b&eacute;cois simplifi&eacute;s (ann&eacute;e d&#39;imposition 2025). Il ne constitue pas un avis fiscal. Chaque situation doit &ecirc;tre valid&eacute;e par un fiscaliste et par les organismes concern&eacute;s (notamment la certification de la CCEEBC pour les biens culturels).</div>
+
+<div class="afo-panel">
+<h2><span class="afo-num">1</span>Votre situation</h2>
+
+<div class="afo-grid">
+<div><label for="revenu">Revenu imposable annuel <span class="afo-hint">Revenu net avant cr&eacute;dits, pour l&#39;ann&eacute;e du don.</span> </label>
+
+<div class="afo-input-money"><span class="afo-dollar">$</span><input id="revenu" min="0" step="1000" type="number" value="95000" /></div>
+</div>
+
+<div><label for="jvm">Juste valeur marchande (JVM) du don <span class="afo-hint">Telle qu&#39;estim&eacute;e par un expert accr&eacute;dit&eacute;.</span> </label>
+
+<div class="afo-input-money"><span class="afo-dollar">$</span><input id="jvm" min="0" step="500" type="number" value="50000" /></div>
+</div>
+
+<div><label for="province">Province de r&eacute;sidence</label>
+
+<p style="margin:6px 0 0; font-size:12.5px; color:var(--muted);">Qu&eacute;bec &mdash; le MVP couvre le Qu&eacute;bec ; les autres provinces suivront.</p>
+</div>
+</div>
+
+<div style="margin-top:26px; padding-top:20px; border-top:1px dashed var(--hairline);">
+<p style="margin:0 0 4px; font-weight:600;">Co&ucirc;t d&#39;acquisition de l&#39;&oelig;uvre</p>
+
+<p style="margin:0 0 16px; font-size:12.5px; color:var(--muted);">Sert de base au calcul du gain en capital potentiel (PBR). N&#39;inclut que les frais capitalisables au sens fiscal &mdash; c.-&agrave;-d. directement rattach&eacute;s &agrave; l&#39;acquisition du bien, et non les d&eacute;penses courantes de d&eacute;tention.</p>
+<label for="prixAchat">Prix d&#39;achat de l&#39;&oelig;uvre</label>
+
+<p style="margin:0 0 6px; font-size:11.5px; color:var(--muted);">Montant pay&eacute; au moment de l&#39;acquisition.</p>
+
+<div class="afo-input-money"><span class="afo-dollar">$</span><input id="prixAchat" min="0" step="500" type="number" value="8000" /></div>
+<label for="autresFrais" style="margin-top:16px; display:block;">Autres frais capitalisables</label>
+
+<p style="margin:0 0 6px; font-size:11.5px; color:var(--muted);">Transport, encadrement et frais d&#39;installation, expertise d&#39;authentification, commission d&#39;acquisition, restauration effectu&eacute;e avant la mise en possession. Exclut l&#39;assurance, l&#39;entretien courant et l&#39;entreposage post&eacute;rieur &agrave; l&#39;acquisition.</p>
+
+<div class="afo-input-money"><span class="afo-dollar">$</span><input id="autresFrais" min="0" step="100" type="number" value="2000" /></div>
+
+<p style="margin-top:20px; padding-top:16px; border-top:2px solid var(--ink); font-size:19px; font-family:var(--font-display); font-weight:600; color:var(--bronze-deep);">Co&ucirc;t d&#39;acquisition total (PBR) : <span id="pbrTotalDisplay">$10&nbsp;000</span></p>
+
+<div class="afo-hint" style="margin-top:12px; padding:10px 12px; border:1px solid var(--hairline); border-left:3px solid var(--bronze); border-radius:2px;"><strong style="color:var(--ink);">Zone grise &agrave; valider :</strong> la fronti&egrave;re entre frais capitalisables et d&eacute;penses courantes n&#39;est pas toujours nette. Une restauration majeure effectu&eacute;e apr&egrave;s l&#39;acquisition, par exemple, peut &ecirc;tre capitalisable si elle augmente durablement la valeur de l&#39;&oelig;uvre plut&ocirc;t que de simplement la maintenir en &eacute;tat &mdash; une qualification qui d&eacute;pend des faits et doit &ecirc;tre tranch&eacute;e avec un fiscaliste avant d&#39;&ecirc;tre ajout&eacute;e au PBR.</div>
+</div>
+
+<div class="afo-checkrow"><input checked="checked" id="etablissementQc" type="checkbox" />
+<div class="afo-ctext">Programme 3 seulement &mdash; le don de bien culturel certifi&eacute; serait fait au profit d&#39;un &eacute;tablissement d&eacute;sign&eacute; du Qu&eacute;bec <span class="afo-hint">Condition requise pour la majoration de 25 % de la JVM aux fins du cr&eacute;dit qu&eacute;b&eacute;cois sur les dons de biens culturels certifi&eacute;s. N&#39;affecte pas le programme 2, qui obtient sa propre majoration de 25 % du simple fait qu&#39;il s&#39;agit d&#39;un don &agrave; une institution mus&eacute;ale qu&eacute;b&eacute;coise.</span></div>
+</div>
+</div>
+
+<div class="afo-results-head">
+<h2>Comparatif des trois programmes</h2>
+<span class="afo-stamp-note">R&eacute;sultats mis &agrave; jour en direct</span></div>
+
+<div class="afo-ledger" id="ledger">
+<div class="afo-program" style="border-bottom:2px solid var(--ink); padding:18px 28px;">
+<div class="afo-rows" style="gap:6px;">
+<div class="afo-row"><span class="afo-label">Co&ucirc;t d&#39;acquisition total (PBR) &mdash; prix d&#39;achat + frais capitalisables</span><span class="afo-value">$10&nbsp;000</span></div>
+
+<div class="afo-row"><span class="afo-label">Juste valeur marchande (JVM) du don</span><span class="afo-value">$50&nbsp;000</span></div>
+
+<div class="afo-row afo-total" style="font-size:13.5px;"><span class="afo-label">Gain en capital brut potentiel (JVM &minus; PBR)</span><span class="afo-value" style="color:var(--ink);">$40&nbsp;000</span></div>
+
+<div class="afo-row"><span class="afo-label">Taux marginal effectif appliqu&eacute; au gain (calcul progressif r&eacute;el)</span><span class="afo-value">38.3%</span></div>
+</div>
+</div>
+
+<div class="afo-program ">
+<div class="afo-program-top">
+<div>
+<p class="afo-program-name">Don &agrave; un organisme accr&eacute;dit&eacute;</p>
+
+<p class="afo-program-desc">Organisme de bienfaisance enregistr&eacute; n&#39;acqu&eacute;rant pas l&#39;&oelig;uvre dans le cadre de sa mission premi&egrave;re.</p>
+</div>
+
+<div class="afo-seal">Meilleur<br />
+avantage<br />
+net</div>
+</div>
+
+<div class="afo-rows">
+<div class="afo-row"><span class="afo-label">Cr&eacute;dit f&eacute;d&eacute;ral (net d&#39;abattement QC)</span><span class="afo-value">$12&nbsp;084</span></div>
+
+<div class="afo-row"><span class="afo-label">Cr&eacute;dit qu&eacute;b&eacute;cois</span><span class="afo-value">$11&nbsp;992</span></div>
+
+<div class="afo-row afo-subtract"><span class="afo-label">Imp&ocirc;t sur gain en capital (calcul progressif r&eacute;el, 50 % inclus)</span><span class="afo-value">&minus;$7&nbsp;660</span></div>
+
+<div class="afo-row afo-total"><span class="afo-label">Avantage net estim&eacute;</span><span class="afo-value">$16&nbsp;416</span></div>
+</div>
+
+<div class="afo-conditions"><strong>Conditions particuli&egrave;res &mdash;</strong> Dans le plafond f&eacute;d&eacute;ral de 75 % du revenu net ($71&nbsp;250) &mdash; cr&eacute;dit enti&egrave;rement r&eacute;clamable cette ann&eacute;e. Re&ccedil;u officiel requis. Aucun plafond de revenu net au Qu&eacute;bec (aboli depuis 2016) &mdash; seul le plafond f&eacute;d&eacute;ral de 75 % s&#39;applique.<span style="color: rgb(33, 29, 23); font-size: 14px;">&nbsp;</span></div>
+
+<div class="afo-conditions"><strong>Attention:</strong> au Qu&eacute;bec, dans les cas des organismes de bienfaisance enregistr&eacute;s, vous ne pourrez r&eacute;clamer &agrave; des fins fiscales la juste valeur marchande (JVM) de votre don que <u>suite &agrave; la vente de celui-ci</u>.&nbsp; &Agrave; ce moment, la JVM sera &eacute;tablie comme &eacute;quivalent au moins &eacute;lev&eacute; des montants suivants: le montant obtenu de la vente de l&#39;&oelig;uvre ou la JVM de l&#39;&oelig;uvre au moment de la vente.&nbsp;</div>
+
+<div class="afo-conditions" style="border-top:none; padding-top:8px; color:#8a3b2b;"><strong style="color:#8a3b2b;">⚠ Risque IMR signal&eacute; &mdash;</strong> le gain en capital et/ou le cr&eacute;dit r&eacute;clam&eacute; sont assez importants pour possiblement d&eacute;clencher l&#39;imp&ocirc;t minimum de remplacement. Non calcul&eacute; dans cet outil (r&egrave;gles 2024+ : inclusion &agrave; 100 % du gain, cr&eacute;dit de don limit&eacute; &agrave; 50 % aux fins de l&#39;IMR) ; &agrave; valider avec un fiscaliste.</div>
+</div>
+
+<div class="afo-program ">
+<div class="afo-program-top">
+<div>
+<p class="afo-program-name">Don &agrave; un mus&eacute;e ou organisme mus&eacute;al accr&eacute;dit&eacute;</p>
+
+<p class="afo-program-desc">Institution mus&eacute;ale qu&eacute;b&eacute;coise reconnue, sans certification de bien culturel exceptionnel.</p>
+</div>
+
+<div class="afo-seal">Meilleur<br />
+avantage<br />
+net</div>
+</div>
+
+<div class="afo-rows">
+<div class="afo-row"><span class="afo-label">Cr&eacute;dit f&eacute;d&eacute;ral (net d&#39;abattement QC)</span><span class="afo-value">$12&nbsp;084</span></div>
+
+<div class="afo-row"><span class="afo-label">Cr&eacute;dit qu&eacute;b&eacute;cois</span><span class="afo-value">$14&nbsp;992</span></div>
+
+<div class="afo-row afo-subtract"><span class="afo-label">Imp&ocirc;t sur gain en capital (calcul progressif r&eacute;el, 50 % inclus)</span><span class="afo-value">&minus;$7&nbsp;660</span></div>
+
+<div class="afo-row afo-total"><span class="afo-label">Avantage net estim&eacute;</span><span class="afo-value">$19&nbsp;416</span></div>
+</div>
+
+<div class="afo-conditions"><strong>Conditions particuli&egrave;res &mdash;</strong> Dans le plafond f&eacute;d&eacute;ral de 75 % du revenu net ($71&nbsp;250) &mdash; cr&eacute;dit enti&egrave;rement r&eacute;clamable cette ann&eacute;e. JVM major&eacute;e de 25 % aux fins du cr&eacute;dit qu&eacute;b&eacute;cois uniquement (m&eacute;canisme propre au don &agrave; une institution mus&eacute;ale qu&eacute;b&eacute;coise, distinct de la certification CCEEBC). Le f&eacute;d&eacute;ral ne reconna&icirc;t pas cette majoration. Demeure assujetti au gain en capital habituel (aucune exon&eacute;ration, contrairement au programme 3). Aucun plafond de revenu net au Qu&eacute;bec depuis 2016.</div>
+
+<div class="afo-conditions" style="border-top:none; padding-top:8px; color:#8a3b2b;"><strong style="color:#8a3b2b;">⚠ Risque IMR signal&eacute; &mdash;</strong> le gain en capital et/ou le cr&eacute;dit r&eacute;clam&eacute; sont assez importants pour possiblement d&eacute;clencher l&#39;imp&ocirc;t minimum de remplacement. Non calcul&eacute; dans cet outil (r&egrave;gles 2024+ : inclusion &agrave; 100 % du gain, cr&eacute;dit de don limit&eacute; &agrave; 50 % aux fins de l&#39;IMR) ; &agrave; valider avec un fiscaliste.</div>
+</div>
+
+<div class="afo-program afo-best">
+<div class="afo-program-top">
+<div>
+<p class="afo-program-name">Don de bien culturel certifi&eacute; (CCEEBC)</p>
+
+<p class="afo-program-desc">Don exceptionnel certifi&eacute; par la Commission canadienne d&#39;examen des exportations de biens culturels.</p>
+</div>
+
+<div class="afo-seal">Meilleur<br />
+avantage<br />
+net</div>
+</div>
+
+<div class="afo-rows">
+<div class="afo-row"><span class="afo-label">Cr&eacute;dit f&eacute;d&eacute;ral (net d&#39;abattement QC)</span><span class="afo-value">$12&nbsp;084</span></div>
+
+<div class="afo-row"><span class="afo-label">Cr&eacute;dit qu&eacute;b&eacute;cois</span><span class="afo-value">$14&nbsp;992</span></div>
+
+<div class="afo-row"><span class="afo-label">Imp&ocirc;t sur gain en capital &eacute;vit&eacute;</span><span class="afo-value">+$7&nbsp;660</span></div>
+
+<div class="afo-row afo-total"><span class="afo-label">Avantage net estim&eacute;</span><span class="afo-value">$34&nbsp;736</span></div>
+</div>
+
+<div class="afo-conditions"><strong>Conditions particuli&egrave;res &mdash;</strong> Aucun plafond de revenu net (f&eacute;d&eacute;ral et qu&eacute;b&eacute;cois) &mdash; cr&eacute;dit enti&egrave;rement r&eacute;clamable l&#39;ann&eacute;e du don, aucun report requis. Exon&eacute;ration totale du gain en capital. JVM major&eacute;e de 25 % aux fins du cr&eacute;dit qu&eacute;b&eacute;cois (&eacute;tablissement d&eacute;sign&eacute; du Qu&eacute;bec). Certification CCEEBC et, pour un &eacute;tablissement qu&eacute;b&eacute;cois, attestation du Conseil du patrimoine culturel du Qu&eacute;bec requises. Processus plus long.</div>
+</div>
+</div>
+
+<div class="afo-footnote">Param&egrave;tres appliqu&eacute;s (2025, &agrave; indexer annuellement) :
+<ul>
+	<li>F&eacute;d&eacute;ral &mdash; 15 % sur les premiers 200 $ de don ; 29 % sur l&#39;exc&eacute;dent ; 33 % sur la partie de l&#39;exc&eacute;dent correspondant au revenu imposable au-del&agrave; de 253 414 $. Plafond annuel : 75 % du revenu net pour les programmes 1 et 2 (report possible sur 5 ans pour l&#39;exc&eacute;dent) ; aucun plafond pour le programme 3 (bien culturel certifi&eacute;).</li>
+	<li>Qu&eacute;bec &mdash; 20 % sur les premiers 200 $ ; 24 % sur l&#39;exc&eacute;dent ; 25,75 % sur la partie de l&#39;exc&eacute;dent correspondant au revenu imposable au-del&agrave; de 129 590 $. <strong>Aucun plafond de revenu net depuis 2016</strong>, pour les trois programmes.</li>
+	<li>Majoration de 25 % de la JVM aux fins du cr&eacute;dit qu&eacute;b&eacute;cois uniquement &mdash; s&#39;applique au programme 2 (don &agrave; une institution mus&eacute;ale qu&eacute;b&eacute;coise, automatique) et au programme 3 (don de bien culturel certifi&eacute;, si l&#39;&eacute;tablissement d&eacute;sign&eacute; est situ&eacute; au Qu&eacute;bec). Ce sont deux m&eacute;canismes distincts ; le f&eacute;d&eacute;ral ne reconna&icirc;t aucune des deux majorations.</li>
+	<li>Abattement du Qu&eacute;bec &mdash; la valeur nette du cr&eacute;dit f&eacute;d&eacute;ral pour un r&eacute;sident du Qu&eacute;bec est r&eacute;duite de 16,5 % (imp&ocirc;t f&eacute;d&eacute;ral abattu).</li>
+	<li>Gain en capital &mdash; taux d&#39;inclusion de 50 % sur le gain (JVM &minus; PBR), impos&eacute; selon un calcul progressif r&eacute;el tenant compte du franchissement des paliers f&eacute;d&eacute;raux et qu&eacute;b&eacute;cois 2025 (et non un taux forfaitaire). Programmes 1 et 2 : gain pleinement imposable. Programme 3 (bien culturel certifi&eacute;) : exon&eacute;ration totale.</li>
+	<li>Imp&ocirc;t minimum de remplacement (IMR) &mdash; non calcul&eacute;. Un signal de risque qualitatif s&#39;affiche pour les programmes 1 et 2 lorsque le gain en capital ou le cr&eacute;dit r&eacute;clam&eacute; sont substantiels, mais aucun montant n&#39;est estim&eacute;.</li>
+</ul>
+Hors de port&eacute;e de cet outil : soci&eacute;t&eacute;s et successions (traitement fiscal distinct), strat&eacute;gies d&#39;&eacute;talement des dons sur plusieurs ann&eacute;es, confirmation de l&#39;admissibilit&eacute; r&eacute;elle &agrave; la certification CCEEBC, confirmation du statut d&#39;&laquo; institution mus&eacute;ale qu&eacute;b&eacute;coise &raquo; du donataire vis&eacute; au programme 2, et provinces autres que le Qu&eacute;bec. Ces param&egrave;tres et seuils doivent &ecirc;tre confirm&eacute;s aupr&egrave;s de l&#39;ARC et de Revenu Qu&eacute;bec avant toute mise en production.</div>
+</div>
+</div><link href="https://d15f1hlpmi6o0q.cloudfront.net/assets/google_search-2df40f1ab41d4a503bf816d78859a1e8.css" media="screen" rel="stylesheet" type="text/css" /></div></div></div><div id="footer"><div class="container footer"><div class="backToTop top_arrow"><a class="top" href="simulateur-d-impact-fiscal-du-don-d-oeuvre-d-art_2.html#">Haut<span></span></a></div><div class="row"><div class="span3"><h3>Tableau de bord</h3><div class="list_1"><ul><li><a href="../messages/new%3Fpainting_id=658.html">Se connecter</a></li><li><a href="../collector_registrations/new.html">S&#x27;inscrire</a></li></ul></div></div><div class="span8"><h3>Artistes disponibles</h3><div class="row"><div class="span2"><div class="list_1"><ul><li><a href="../artists/3812-akoi-aka/paintings.html">Akoi <b>AKA</b></a></li><li><a href="../artists/3481-basque/paintings.html"> <b>Basque</b></a></li><li><a href="../artists/320-gisele-benoit/paintings.html">Gisèle <b>Benoit</b></a></li><li><a href="../artists/322-dominic-besner/paintings.html">Dominic <b>Besner</b></a></li><li><a href="../artists/3359-normand-boisvert/paintings.html">Normand <b>Boisvert</b></a></li><li><a href="../artists/2-diane-brouillette/paintings.html">Diane <b>Brouillette</b></a></li><li><a href="../artists/5-serge-brunoni/paintings.html">Serge <b>Brunoni</b></a></li><li><a href="../artists/22-arlette-carreau-kingwell/paintings.html">Arlette <b>Carreau-Kingwell</b></a></li><li><a href="../artists/383-jean-philippe-dallaire/paintings.html">Jean-Philippe <b>Dallaire</b></a></li><li><a href="../artists/3357-littorio-del-signore/paintings.html">Littorio <b>Del Signore</b></a></li><li><a href="../artists/7-joseph-charles-franchere/paintings.html">Joseph-Charles <b>Franchère</b></a></li><li><a href="../artists/4-jean-gaudreau/paintings.html">Jean <b>Gaudreau</b></a></li><li><a href="../artists/3784-gilles-emmanuel-gingras/paintings.html">Gilles Emmanuel <b>Gingras</b></a></li><li><a href="../artists/13-vladimir-horik/paintings.html">Vladimir <b>Horik</b></a></li><li><a href="../artists/2561-jean-paul-jerome/paintings.html">Jean-Paul <b>Jérôme</b></a></li><li><a href="../artists/2010-zbigniew-stanley-kupczynski/paintings.html">Zbigniew Stanley <b>Kupczynski</b></a></li><li><a href="../artists/490-jean-pierre-lafrance/paintings.html">Jean-Pierre <b>Lafrance</b></a></li><li><a href="../artists/9-paul-tex-lecor/paintings.html">Paul « Tex » <b>Lecor</b></a></li><li><a href="../artists/2617-claude-le-sauteur/paintings.html">Claude <b>Le Sauteur</b></a></li><li><a href="../artists/3480-guy-anne-massicotte/paintings.html">Guy-Anne <b>Massicotte</b></a></li><li><a href="../artists/16-joan-miro/paintings.html">Joan <b>Miró</b></a></li><li><a href="../artists/2695-norval-morrisseau/paintings.html">Norval <b>Morrisseau</b></a></li><li><a href="../artists/775-pablo-picasso/paintings.html">Pablo <b>Picasso</b></a></li><li><a href="../artists/577-rene-jean-richard/paintings.html">René Jean <b>Richard</b></a></li><li><a href="../artists/3504-henri-rousseau-dit-le-douanier-rousseau/paintings.html">Henri <b>Rousseau (dit "Le douanier Rousseau")</b></a></li><li><a href="../artists/2856-benoit-simard/paintings.html">Benoit <b>Simard</b></a></li><li><a href="../artists/2885-tobie-steinhouse/paintings.html">Tobie <b>Steinhouse</b></a></li><li><a href="../artists/619-pierre-tougas/paintings.html">Pierre <b>Tougas</b></a></li><li><a href="../artists/2940-joseph-richard-veilleux/paintings.html">Joseph-Richard <b>Veilleux</b></a></li></ul></div></div><div class="span2"><div class="list_1"><ul><li><a href="../artists/300-leo-ayotte/paintings.html">Léo <b>Ayotte</b></a></li><li><a href="../artists/313-p-v-paul-vanier-beaulieu/paintings.html">P.V. (Paul-Vanier) <b>Beaulieu</b></a></li><li><a href="../artists/3811-monique-benoit/paintings.html">Monique <b>Benoit</b></a></li><li><a href="../artists/1759-andre-besse/paintings.html">André <b>Besse</b></a></li><li><a href="../artists/337-louis-pierre-bougie/paintings.html">Louis-Pierre <b>Bougie</b></a></li><li><a href="../artists/3-marguerite-kittie-bruneau/paintings.html">Marguerite (Kittie) <b>Bruneau</b></a></li><li><a href="../artists/354-roger-cantin/paintings.html">Roger <b>Cantin</b></a></li><li><a href="../artists/1884-berthe-des-clayes/paintings.html">Berthe Des <b>Clayes</b></a></li><li><a href="../artists/3807-jacopo-da-ponte-bassano/paintings.html">Jacopo <b> da Ponte (Bassano)</b></a></li><li><a href="../artists/398-antoine-dumas/paintings.html">Antoine <b>Dumas</b></a></li><li><a href="../artists/417-frere-jerome/paintings.html"> <b>Frère Jérôme</b></a></li><li><a href="../artists/3477-robert-gerard/paintings.html">Robert <b>Gérard</b></a></li><li><a href="../artists/11-joseph-giunta/paintings.html">Joseph <b>Giunta</b></a></li><li><a href="../artists/458-normand-hudon/paintings.html">Normand <b>Hudon</b></a></li><li><a href="../artists/2564-john-young-johnstone/paintings.html">John Young <b>Johnstone</b></a></li><li><a href="../artists/3445-fernand-labelle/paintings.html">Fernand <b>Labelle</b></a></li><li><a href="../artists/8-lucie-lapointe/paintings.html">Lucie <b>Lapointe</b></a></li><li><a href="../artists/500-jean-paul-lemieux/paintings.html">Jean-Paul <b>Lemieux</b></a></li><li><a href="../artists/926-roy-lichtenstein/paintings.html">Roy <b>Lichtenstein</b></a></li><li><a href="../artists/2658-henri-leopold-masson/paintings.html">Henri Léopold <b>Masson</b></a></li><li><a href="../artists/3796-andre-monet/paintings.html">André <b>Monet</b></a></li><li><a href="../artists/3486-sophie-paquet/paintings.html">Sophie <b>Paquet</b></a></li><li><a href="../artists/3442-georgette-pihay/paintings.html">Georgette <b>Pihay</b></a></li><li><a href="../artists/1-jean-paul-riopelle/paintings.html">Jean-Paul <b>Riopelle</b></a></li><li><a href="../artists/591-sean-rudman/paintings.html">Sean <b>Rudman</b></a></li><li><a href="../artists/3485-ronald-ron-simpkins/paintings.html">Ronald (Ron) <b>Simpkins</b></a></li><li><a href="../artists/615-miyuki-tanobe/paintings.html">Miyuki <b>Tanobe</b></a></li><li><a href="../artists/19-fernand-toupin/paintings.html">Fernand <b>Toupin</b></a></li><li><a href="../artists/628-arthur-villeneuve/paintings.html">Arthur <b>Villeneuve</b></a></li></ul></div></div><div class="span2"><div class="list_1"><ul><li><a href="../artists/2224-christian-marcel-barbeau/paintings.html">Christian Marcel <b>Barbeau</b></a></li><li><a href="../artists/1732-louis-joseph-octave-belanger/paintings.html">Louis Joseph Octave <b>Bélanger</b></a></li><li><a href="../artists/1750-christian-bergeron/paintings.html">Christian <b>Bergeron</b></a></li><li><a href="../artists/3777-alban-bluteau/paintings.html">Alban  <b>Bluteau </b></a></li><li><a href="../artists/1077-georges-braque/paintings.html">Georges <b>Braque</b></a></li><li><a href="../artists/345-umberto-bruni/paintings.html">Umberto <b>Bruni</b></a></li><li><a href="../artists/3454-claude-carette/paintings.html">Claude <b>Carette</b></a></li><li><a href="../artists/763-salvador-dali/paintings.html">Salvador <b>Dalí</b></a></li><li><a href="../artists/393-georges-delfosse/paintings.html">Georges <b>Delfosse</b></a></li><li><a href="../artists/2426-marc-aurele-fortin/paintings.html">Marc-Aurèle <b>Fortin</b></a></li><li><a href="../artists/3461-sebastien-gaudette/paintings.html">Sébastien <b>Gaudette</b></a></li><li><a href="../artists/10-lise-gervais/paintings.html">Lise <b>Gervais</b></a></li><li><a href="../artists/3364-jean-pierre-guay/paintings.html">Jean-Pierre <b>Guay</b></a></li><li><a href="../artists/465-francesco-iacurto/paintings.html">Francesco <b>Iacurto</b></a></li><li><a href="../artists/3798-rosa-sara-ro-keezer/paintings.html">Rosa Sara (Ro) <b>Keezer</b></a></li><li><a href="../artists/3804-alain-lacaze/paintings.html">Alain <b>Lacaze</b></a></li><li><a href="../artists/3495-raynald-leclerc/paintings.html">Raynald <b>Leclerc</b></a></li><li><a href="../artists/501-serge-lemoyne/paintings.html">Serge <b>Lemoyne</b></a></li><li><a href="../artists/3380-jacques-lisee/paintings.html">Jacques <b>Lisée</b></a></li><li><a href="../artists/15-henri-matisse/paintings.html">Henri <b>Matisse</b></a></li><li><a href="../artists/3475-denys-morisset/paintings.html">Denys <b>Morisset</b></a></li><li><a href="../artists/3522-andre-phillibert/paintings.html">André  <b>Phillibert</b></a></li><li><a href="../artists/3474-andre-pitre/paintings.html">André  <b>Pitre </b></a></li><li><a href="../artists/3521-jean-daniel-rohrer/paintings.html">Jean-Daniel  <b>Rohrer</b></a></li><li><a href="../artists/3374-toonoo-sharky/paintings.html">Toonoo <b>Sharky</b></a></li><li><a href="../artists/606-paul-soulikias/paintings.html">Paul <b>Soulikias</b></a></li><li><a href="../artists/3765-luigi-tiengo/paintings.html">Luigi <b>Tiengo</b></a></li><li><a href="../artists/1348-victor-vasarely/paintings.html">Victor <b>Vasarely</b></a></li><li><a href="../artists/2183-balint-zsako/paintings.html">Balint <b>Zsako</b></a></li></ul></div></div></div></div></div></div></div><div id="bottom"><div class="container"><div id="copyright">© 2026 Les Collectionneurs Associés. Tous droits réservés.</div><div id="bottom-links"><a href="qui-sommes-nous.html">Qui sommes-nous?</a><a href="faq.html">FAQ</a><a href="charte-de-confidentialite.html">Charte de confidentialité</a><a href="partenaires.html">Partenaires</a><a href="tutoriels.html">Tutoriels</a><a href="mission.html">Mission</a></div></div></div><script data-turbolinks-eval="false" src="https://d15f1hlpmi6o0q.cloudfront.net/assets/application-25c527bf54a60eb3a2ea966229915de6.js" type="text/javascript"></script><script data-turbolinks-eval="false" src="https://d15f1hlpmi6o0q.cloudfront.net/assets/google_zone-69c83275f38f4138590c51cef1798639.js" type="text/javascript"></script><script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount','UA-54659713-1']);
+_gaq.push(['_setDomainName','auto']);
+_gaq.push(['_trackPageview']);
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+<script type="text/javascript">I18n.defaultLocale = 'fr';
+I18n.locale = "fr";
+window.locale = 'fr';</script><script data-turbolinks-eval="false" type="text/javascript">CATEGORY_ID = "4";MULTIPLE_PAINTINGS_ID = "2";CURRENCIES = {2: '$ CA', 1: '$ US', 3: '€'};PERIOD_RATIOS = {7: 1.25, 8: 1.5, 9: 1.75, 10: 2.0, 11: 3.0};CANADA_ID = 1;QUEBEC_ID = 9;MEASURE_UNIT_INCH_ID = 3</script><script type="text/javascript">document.addEventListener('DOMContentLoaded', function () {
+
+// ---- Détection de la langue via l'URL de la page (/fr/ ou /en/) ----
+// Repli sur le français si l'URL ne contient ni l'un ni l'autre.
+const LANG = window.location.pathname.includes('/en/') ? 'en' : 'fr';
+
+const TEXT = {
+  fr: {
+    locale: 'fr-CA',
+    na: 's.o.',
+    seal: "Meilleur<br>avantage<br>net",
+    summaryPbr: "Coût d'acquisition total (PBR) — prix d'achat + frais capitalisables",
+    summaryJvm: "Juste valeur marchande (JVM) du don",
+    summaryGain: "Gain en capital brut potentiel (JVM − PBR)",
+    summaryRate: "Taux marginal effectif appliqué au gain (calcul progressif réel)",
+    rowFed: "Crédit fédéral (net d'abattement QC)",
+    rowQc: "Crédit québécois",
+    rowGainAvoided: "Impôt sur gain en capital évité",
+    rowGainTax: "Impôt sur gain en capital (calcul progressif réel, 50 % inclus)",
+    rowTotal: "Avantage net estimé",
+    conditionsLabel: "Conditions particulières —",
+    amtLabel: "⚠ Risque IMR signalé —",
+    amtText: "le gain en capital et/ou le crédit réclamé sont assez importants pour possiblement déclencher l'impôt minimum de remplacement. Non calculé dans cet outil (règles 2024+ : inclusion à 100 % du gain, crédit de don limité à 50 % aux fins de l'IMR) ; à valider avec un fiscaliste.",
+    limitExceeded: (limitAmt, reporte) => `Excède le plafond fédéral de 75 % du revenu net (${limitAmt}) — ${reporte} du don doit être reporté sur jusqu'à 5 ans, sous réserve d'un revenu net suffisant les années suivantes. Le crédit fédéral total ci-dessus suppose que ce solde sera entièrement récupéré.`,
+    limitWithin: (limitAmt) => `Dans le plafond fédéral de 75 % du revenu net (${limitAmt}) — crédit entièrement réclamable cette année.`,
+    programs: [
+      {
+        name: "Don à un organisme accrédité",
+        desc: "Organisme de bienfaisance enregistré n'acquérant pas l'œuvre dans le cadre de sa mission première.",
+        extraConditions: " Reçu officiel requis. Aucun plafond de revenu net au Québec (aboli depuis 2016) — seul le plafond fédéral de 75 % s'applique.",
+        warning: "Attention : dans le cas du Québec, vous ne pourrez récupérer votre reçu fiscal que suite à la vente du bien et, alors là, votre juste valeur marchande (JVM) sera établie comme équivalent au montant le moins élevé du produit de la vente ou de la JVM établie au moment de ladite vente."
+      },
+      {
+        name: "Don à un musée ou organisme muséal accrédité",
+        desc: "Institution muséale québécoise reconnue, sans certification de bien culturel exceptionnel.",
+        extraConditions: " JVM majorée de 25 % aux fins du crédit québécois uniquement (mécanisme propre au don à une institution muséale québécoise, distinct de la certification CCEEBC). Le fédéral ne reconnaît pas cette majoration. Demeure assujetti au gain en capital habituel (aucune exonération, contrairement au programme 3). Aucun plafond de revenu net au Québec depuis 2016."
+      },
+      {
+        name: "Don de bien culturel certifié (CCEEBC)",
+        desc: "Don exceptionnel certifié par la Commission canadienne d'examen des exportations de biens culturels.",
+        conditionsFull: (etablissementQc) => "Aucun plafond de revenu net (fédéral et québécois) — crédit entièrement réclamable l'année du don, aucun report requis. Exonération totale du gain en capital. " + (etablissementQc ? "JVM majorée de 25 % aux fins du crédit québécois (établissement désigné du Québec)." : "Majoration de 25 % non applicable (établissement non désigné du Québec).") + " Certification CCEEBC et, pour un établissement québécois, attestation du Conseil du patrimoine culturel du Québec requises. Processus plus long."
+      }
+    ]
+  },
+  en: {
+    locale: 'en-CA',
+    na: 'n/a',
+    seal: "Best<br>net<br>benefit",
+    summaryPbr: "Total acquisition cost (ACB) — purchase price + capitalizable costs",
+    summaryJvm: "Fair market value (FMV) of the gift",
+    summaryGain: "Potential gross capital gain (FMV − ACB)",
+    summaryRate: "Effective marginal rate applied to the gain (actual progressive calculation)",
+    rowFed: "Federal credit (net of Quebec abatement)",
+    rowQc: "Quebec credit",
+    rowGainAvoided: "Capital gains tax avoided",
+    rowGainTax: "Capital gains tax (actual progressive calculation, 50% inclusion)",
+    rowTotal: "Estimated net benefit",
+    conditionsLabel: "Special conditions —",
+    amtLabel: "⚠ AMT risk flagged —",
+    amtText: "the capital gain and/or the credit claimed are large enough to potentially trigger the Alternative Minimum Tax. Not calculated in this tool (2024+ rules: 100% inclusion of the gain, donation credit limited to 50% for AMT purposes); to be confirmed with a tax professional.",
+    limitExceeded: (limitAmt, reporte) => `Exceeds the 75% federal net-income limit (${limitAmt}) — ${reporte} of the gift must be carried forward over up to 5 years, subject to sufficient net income in future years. The total federal credit shown above assumes this balance will be fully recovered.`,
+    limitWithin: (limitAmt) => `Within the 75% federal net-income limit (${limitAmt}) — credit fully claimable this year.`,
+    programs: [
+      {
+        name: "Gift to an accredited organization",
+        desc: "A registered charity that does not acquire the work as part of its primary mission.",
+        extraConditions: " An official receipt is required. No net-income limit in Quebec (abolished since 2016) — only the 75% federal limit applies.",
+        warning: "Note: in Quebec, the tax receipt can only be issued after the property is sold, and at that point the fair market value (FMV) will be set as the lesser of the sale proceeds or the FMV established at the time of that sale."
+      },
+      {
+        name: "Gift to an accredited museum or museum-type organization",
+        desc: "A recognized Quebec museum institution, without certification as exceptional cultural property.",
+        extraConditions: " FMV increased by 25% for purposes of the Quebec credit only (a mechanism specific to gifts to a Quebec museum institution, distinct from CCPERB certification). The federal government does not recognize this increase. Remains subject to the usual capital gains tax (no exemption, unlike Program 3). No net-income limit in Quebec since 2016."
+      },
+      {
+        name: "Certified cultural property gift (CCPERB)",
+        desc: "An exceptional gift certified by the Canadian Cultural Property Export Review Board.",
+        conditionsFull: (etablissementQc) => "No net-income limit (federal or Quebec) — credit fully claimable in the year of the gift, no carry-forward required. Full exemption from capital gains tax. " + (etablissementQc ? "FMV increased by 25% for purposes of the Quebec credit (designated Quebec institution)." : "25% increase not applicable (institution not designated in Quebec).") + " CCPERB certification is required, and for a Quebec institution, additional certification from the Conseil du patrimoine culturel du Québec is also required. The process takes longer."
+      }
+    ]
+  }
+};
+
+const L = TEXT[LANG];
+
+function fmt(n){
+  const sign = n < 0 ? "−" : "";
+  n = Math.abs(Math.round(n));
+  return sign + "$" + n.toLocaleString(L.locale);
+}
+
+function donationCredit(amount, threshold200Rate, midRate, topRate, topIncomeThreshold, taxableIncome){
+  const base = Math.min(amount, 200);
+  const excess = Math.max(0, amount - 200);
+  const excessAtTop = Math.min(excess, Math.max(0, taxableIncome - topIncomeThreshold));
+  const excessAtMid = excess - excessAtTop;
+  return base*threshold200Rate + excessAtMid*midRate + excessAtTop*topRate;
+}
+
+// ---- Paliers d'imposition réels 2025 (indépendants de la langue) ----
+const FED_BRACKETS = [
+  [0, 57375, 0.15],
+  [57375, 114750, 0.205],
+  [114750, 177882, 0.26],
+  [177882, 253414, 0.29],
+  [253414, Infinity, 0.33]
+];
+const QC_BRACKETS = [
+  [0, 53255, 0.14],
+  [53255, 106495, 0.19],
+  [106495, 129590, 0.24],
+  [129590, Infinity, 0.2575]
+];
+const QC_ABATTEMENT = 0.165;
+
+function progressiveTax(income, brackets){
+  let tax = 0;
+  for(const [lo, hi, rate] of brackets){
+    if(income > lo){ tax += (Math.min(income,hi) - lo) * rate; }
+  }
+  return tax;
+}
+function totalTax(income){
+  return progressiveTax(income, FED_BRACKETS)*(1-QC_ABATTEMENT) + progressiveTax(income, QC_BRACKETS);
+}
+function impotSurGain(revenu, gainBrut){
+  const gainImposable = gainBrut * 0.5;
+  if(gainImposable <= 0) return 0;
+  return Math.max(0, totalTax(revenu + gainImposable) - totalTax(revenu));
+}
+
+function compute(){
+  const revenu = parseFloat(document.getElementById('revenu').value) || 0;
+  const jvm = parseFloat(document.getElementById('jvm').value) || 0;
+  const prixAchat = parseFloat(document.getElementById('prixAchat').value) || 0;
+  const autresFrais = parseFloat(document.getElementById('autresFrais').value) || 0;
+  const pbr = prixAchat + autresFrais;
+  document.getElementById('pbrTotalDisplay').textContent = fmt(pbr);
+  const etablissementQc = document.getElementById('etablissementQc').checked;
+
+  const FED_TOP_THRESHOLD = 253414;
+  const QC_TOP_THRESHOLD = 129590;
+  const FED_LIMIT_PCT = 0.75;
+
+  const gainBrut = Math.max(0, jvm - pbr);
+
+  // ---- Programme 1 ----
+  const fedLimitAmount = revenu * FED_LIMIT_PCT;
+  const p1_utilisableCetteAnnee = Math.min(jvm, fedLimitAmount);
+  const p1_reporte = Math.max(0, jvm - p1_utilisableCetteAnnee);
+  const p1_fedCreditGross = donationCredit(jvm, 0.15, 0.29, 0.33, FED_TOP_THRESHOLD, revenu);
+  const p1_fedCreditNet = p1_fedCreditGross * (1 - QC_ABATTEMENT);
+  const p1_qcCredit = donationCredit(jvm, 0.20, 0.24, 0.2575, QC_TOP_THRESHOLD, revenu);
+  const p1_capGainTax = impotSurGain(revenu, gainBrut);
+  const p1_total = p1_fedCreditNet + p1_qcCredit - p1_capGainTax;
+  const p1_donLimitNote = p1_reporte > 0
+    ? L.limitExceeded(fmt(fedLimitAmount), fmt(p1_reporte))
+    : L.limitWithin(fmt(fedLimitAmount));
+
+  // ---- Programme 2 ----
+  const jvmQcMajoreeP2 = jvm * 1.25;
+  const p2_fedCreditNet = p1_fedCreditNet;
+  const p2_qcCredit = donationCredit(jvmQcMajoreeP2, 0.20, 0.24, 0.2575, QC_TOP_THRESHOLD, revenu);
+  const p2_capGainTax = p1_capGainTax;
+  const p2_total = p2_fedCreditNet + p2_qcCredit - p2_capGainTax;
+
+  // ---- Programme 3 ----
+  const jvmQcMajoree = etablissementQc ? jvm * 1.25 : jvm;
+  const p3_fedCreditGross = donationCredit(jvm, 0.15, 0.29, 0.33, FED_TOP_THRESHOLD, revenu);
+  const p3_fedCreditNet = p3_fedCreditGross * (1 - QC_ABATTEMENT);
+  const p3_qcCredit = donationCredit(jvmQcMajoree, 0.20, 0.24, 0.2575, QC_TOP_THRESHOLD, revenu);
+  const p3_gainAvoided = impotSurGain(revenu, gainBrut);
+  const p3_total = p3_fedCreditNet + p3_qcCredit + p3_gainAvoided;
+
+  // ---- Risque IMR/AMT ----
+  const AMT_GAIN_THRESHOLD = 50000;
+  const AMT_CREDIT_SHARE_THRESHOLD = 0.20;
+  const impotReferenceRevenu = totalTax(revenu) || 1;
+  const p1_amtRisk = (gainBrut > AMT_GAIN_THRESHOLD) || ((p1_fedCreditNet + p1_qcCredit) / impotReferenceRevenu > AMT_CREDIT_SHARE_THRESHOLD);
+  const p2_amtRisk = (gainBrut > AMT_GAIN_THRESHOLD) || ((p2_fedCreditNet + p2_qcCredit) / impotReferenceRevenu > AMT_CREDIT_SHARE_THRESHOLD);
+
+  const programs = [
+    { name: L.programs[0].name, desc: L.programs[0].desc,
+      fed: p1_fedCreditNet, qc: p1_qcCredit, capGainTax: p1_capGainTax, total: p1_total,
+      amtRisk: p1_amtRisk, conditions: p1_donLimitNote + L.programs[0].extraConditions, warning: L.programs[0].warning },
+    { name: L.programs[1].name, desc: L.programs[1].desc,
+      fed: p2_fedCreditNet, qc: p2_qcCredit, capGainTax: p2_capGainTax, total: p2_total,
+      amtRisk: p2_amtRisk, conditions: p1_donLimitNote + L.programs[1].extraConditions },
+    { name: L.programs[2].name, desc: L.programs[2].desc,
+      fed: p3_fedCreditNet, qc: p3_qcCredit, capGainTax: 0, gainAvoided: p3_gainAvoided, total: p3_total,
+      amtRisk: false, conditions: L.programs[2].conditionsFull(etablissementQc) }
+  ];
+
+  const bestIndex = programs.reduce((best,p,i,arr)=> p.total > arr[best].total ? i : best, 0);
+
+  const summaryBar = `
+    <div class="afo-program" style="border-bottom:2px solid var(--ink); padding:18px 28px;">
+      <div class="afo-rows" style="gap:6px;">
+        <div class="afo-row"><span class="afo-label">${L.summaryPbr}</span><span class="afo-leader"></span><span class="afo-value">${fmt(pbr)}</span></div>
+        <div class="afo-row"><span class="afo-label">${L.summaryJvm}</span><span class="afo-leader"></span><span class="afo-value">${fmt(jvm)}</span></div>
+        <div class="afo-row afo-total" style="font-size:13.5px;"><span class="afo-label">${L.summaryGain}</span><span class="afo-leader"></span><span class="afo-value" style="color:var(--ink);">${fmt(gainBrut)}</span></div>
+        <div class="afo-row"><span class="afo-label">${L.summaryRate}</span><span class="afo-leader"></span><span class="afo-value">${gainBrut>0 ? (impotSurGain(revenu,gainBrut)/(gainBrut*0.5)*100).toFixed(1)+"%" : L.na}</span></div>
+      </div>
+    </div>`;
+
+  const ledger = document.getElementById('ledger');
+  ledger.innerHTML = summaryBar + programs.map((p,i)=>{
+    const isBest = i === bestIndex;
+    let extraRow = "";
+    if(p.gainAvoided !== undefined){
+      extraRow = `<div class="afo-row"><span class="afo-label">${L.rowGainAvoided}</span><span class="afo-leader"></span><span class="afo-value">+${fmt(p.gainAvoided)}</span></div>`;
+    } else {
+      extraRow = `<div class="afo-row afo-subtract"><span class="afo-label">${L.rowGainTax}</span><span class="afo-leader"></span><span class="afo-value">−${fmt(p.capGainTax)}</span></div>`;
+    }
+    const amtNote = p.amtRisk
+      ? `<div class="afo-conditions" style="border-top:none; padding-top:8px; color:#8a3b2b;"><strong style="color:#8a3b2b;">${L.amtLabel}</strong> ${L.amtText}</div>`
+      : "";
+    return `
+    <div class="afo-program ${isBest ? 'afo-best' : ''}">
+      <div class="afo-program-top">
+        <div>
+          <p class="afo-program-name">${p.name}</p>
+          <p class="afo-program-desc">${p.desc}</p>
+        </div>
+        <div class="afo-seal">${L.seal}</div>
+      </div>
+      <div class="afo-rows">
+        <div class="afo-row"><span class="afo-label">${L.rowFed}</span><span class="afo-leader"></span><span class="afo-value">${fmt(p.fed)}</span></div>
+        <div class="afo-row"><span class="afo-label">${L.rowQc}</span><span class="afo-leader"></span><span class="afo-value">${fmt(p.qc)}</span></div>
+        ${extraRow}
+        <div class="afo-row afo-total"><span class="afo-label">${L.rowTotal}</span><span class="afo-leader"></span><span class="afo-value">${fmt(p.total)}</span></div>
+      </div>
+      <div class="afo-conditions"><strong>${L.conditionsLabel}</strong> ${p.conditions}</div>
+      ${p.warning ? `<div class="afo-hint" style="margin-top:10px; padding:10px 12px; border:1px solid var(--hairline); border-left:3px solid var(--bronze); border-radius:2px; color:var(--muted); font-size:12px;">${p.warning}</div>` : ""}
+      ${amtNote}
+    </div>`;
+  }).join("");
+}
+
+['revenu','jvm','prixAchat','autresFrais','etablissementQc'].forEach(id=>{
+  document.getElementById(id).addEventListener('input', compute);
+});
+compute();
+});</script></body></html>

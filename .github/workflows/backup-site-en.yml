@@ -8,8 +8,8 @@ on:
   workflow_dispatch: # permet aussi de lancer la sauvegarde manuellement depuis l'onglet "Actions"
 
 concurrency:
-  group: sauvegarde-site-en
-  cancel-in-progress: true # si une nouvelle exécution démarre, l'ancienne (encore en cours) est annulée automatiquement
+  group: sauvegarde-site
+  cancel-in-progress: false
 
 permissions:
   contents: write # nécessaire pour que le job puisse committer et pousser dans le dépôt

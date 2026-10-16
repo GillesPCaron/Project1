@@ -3,7 +3,7 @@ name: Sauvegarde bi-mensuelle du site (EN)
 on:
   schedule:
     # Se déclenche le 2 et le 16 de chaque mois à 05:00 UTC 
-    # rapport à la version FR pour éviter que les deux tournent exactement en même temps)
+    # = minuit heure de l'Est (hiver) / 1h du matin (été, à cause du changement d'heure)
     - cron: '0 5 2,16 * *'
   workflow_dispatch: # permet aussi de lancer la sauvegarde manuellement depuis l'onglet "Actions"
 

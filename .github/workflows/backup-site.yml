@@ -9,7 +9,7 @@ on:
 
 concurrency:
   group: sauvegarde-site
-  cancel-in-progress: false
+  cancel-in-progress: true # si une nouvelle exécution démarre, l'ancienne (encore en cours) est annulée automatiquement
 
 permissions:
   contents: write # nécessaire pour que le job puisse committer et pousser dans le dépôt
@@ -109,7 +109,8 @@ jobs:
             echo "Aucun changement détecté depuis la dernière sauvegarde."
           else
             git commit -m "Sauvegarde automatique du ${{ steps.date.outputs.today }}"
-            git push
+            # Si le push est refusé (autre sauvegarde poussée entre-temps), on récupère ses changements et on réessaie
+            git push || { git pull --rebase origin main && git push; }
             git tag "sauvegarde-${{ steps.date.outputs.today }}" || echo "Étiquette déjà existante pour aujourd'hui (probablement un second lancement le même jour) - ignoré."
             git push origin "sauvegarde-${{ steps.date.outputs.today }}" || echo "Push de l'étiquette ignoré (déjà présente sur le dépôt distant)."
           fi
